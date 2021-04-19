@@ -218,8 +218,7 @@ void solutionwithRoundRobin(int priority[], int burst[], int arrival[], int n)
         }
         int ii=tem.pid;
         if(ii==n) ii=0;
-        //if(tem.pid==n) ii=0;
-        //else ii=tem.pid;
+
         int counter = 0;
         //cout<< ii<< endl;
         while(counter++<n)
@@ -233,27 +232,12 @@ void solutionwithRoundRobin(int priority[], int burst[], int arrival[], int n)
             ii++;
             if(ii==n) ii=0;
         }
-        /*for(;ii<n;ii++)
-        {
-            if()
-            if(processes[ii].arrival<=total&&processes[ii].pid!=tem.pid && processes[ii].burst>0)
-            {
-                q.push(processes[ii]);
 
-                //cout<< "pushed: "<<ii<< endl;
-                //cout<<q.size()<<endl;
-            }
-        }*/
         if(cc2==n)
         {
-            //cout<< "ami"<<endl;
             break;
         }
-        //cout<< q.size()<<endl;
-        /* if(q.empty())
-         {
-             cout<< "ber holam"<<endl;
-         }*/
+
     }
     cout<< "Order: ";
     for(int i=0; i<res.size(); i++)
@@ -268,20 +252,7 @@ void solutionwithRoundRobin(int priority[], int burst[], int arrival[], int n)
 
 
 bool done[7] = {false};
-//int n = 6;
-/*process findMinSize(int n, int ttime)
-{
-    process ret;
-    ret.burst=INT_MAX;
-    ret.pid= -1;
-    for(int i=0;i<n;i++)
-    {
-        if(vis[i]==false && processes[i].burst<ret.burst && processes[i].arrival<=ttime)
-            ret = processes[i];
-    }
-    vis[ret.pid-1]=true;
-    return ret;
-}*/
+
 
 bool foo2(process x, process y)
 {
@@ -340,11 +311,9 @@ void sjfPreemp(int n)
         ttt+=processes[i].burst;
         cpy[i]=processes[i].burst;
     }
-    //cout<< ttt<<endl;
     while(!dq.empty())
     {
-        //if(cc++ == 5) break;
-        // cout<< "dhuksi"<<endl;
+
         process tem = dq.back();
         bool flag = false;
         for(int i=0; i<n; i++)
