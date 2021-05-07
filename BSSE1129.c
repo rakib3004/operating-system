@@ -3,16 +3,16 @@
 #include<semaphore.h>
 
 sem_t reader_process,writer_process;
-int value = 0,rcount = 0;
+int value = 0,reader_count = 0;
 
 void *reader(void *arg)
 {
   int f;
   f = ((int)arg);
   sem_wait(&reader_process);
-  rcount++;
+  reader_count++;
   
-  if(rcount==1){
+  if(reader_count==1){
     sem_wait(&writer_process);
   }
 
@@ -20,8 +20,8 @@ void *reader(void *arg)
   printf("Reader: %d reads, value= %d\n",f,data);
 
   sem_wait(&reader_process);
-  rcount--;
-  if(rcount==0)
+  reader_count--;
+  if(reader_count==0)
   {
       sem_post(&writer_process);
 
