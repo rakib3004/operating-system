@@ -1,81 +1,60 @@
-#include<semaphore.h>
 #include<stdio.h>
 #include<pthread.h>
+#include<semaphore.h>
 
-void *reader(void *);
-void *writer(void *);
+sem_t mutex,writeblock;
+int data = 0,rcount = 0;
 
-sem_t a,b,read_semaphore,write_semaphore;
-pthread_t read[5],write[5];
-
-int readcount=0,writecount=0,sh_var=5,bsize[5];
-
-
-void *reader(void *i)
+void *reader(void *arg)
 {
-        printf("\n-------------------------");
-        printf("\n\n reader- %d is reading", i );
+  int f;
+  f = ((int)arg);
+  sem_wait(&mutex);
+  rcount++;
+  if(rcount==1){
+    sem_wait(&writeblock);
+  }
 
-        sem_wait(&read_semaphore);
-        sem_wait(&a);
-        readcount++;
-        if(readcount==1)
-            sem_wait(&write_semaphore);
-        sem_post(&a);
-        sem_post(&read_semaphore);
-        printf("\nupdated value : %d ",sh_var);
-        sem_wait(&a);
-        readcount--;
-        if(readcount==0)
-            sem_post(&write_semaphore);
-        sem_post(&a);
+  sem_post(&mutex);
+  printf("Data read by the reader%d is %d\n",f,data);
+  sleep(1);
+  sem_wait(&mutex);
+  rcount--;
+  if(rcount==0)
+  {
+      sem_post(&writeblock);
+
+  }
+
+  sem_post(&mutex);
 }
 
-void *writer(void *i)
+void *writer(void *arg)
 {
-        printf("\n\n writer- %d is writing",i);
-        sem_wait(&b);
-        writecount++;
-        if(writecount==1)
-        sem_wait(&read_semaphore);
-        sem_post(&b);
-        sem_wait(&write_semaphore);
-
-        sh_var=sh_var+5;
-        sem_post(&write_semaphore);
-        sem_wait(&b);
-        writecount--;
-        if(writecount==0)
-        sem_post(&read_semaphore);
-        sem_post(&b);
+  int f;
+  f = ((int) arg);
+  sem_wait(&writeblock);
+  data++;
+  printf("Data writen by the writer%d is %d\n",f,data);
+  sleep(1);
+  sem_post(&writeblock);
 }
 
 int main()
 {
-        sem_init(&a,0,1);
-        sem_init(&write_semaphore,0,1);
-        sem_init(&b,0,1);
-        sem_init(&read_semaphore,0,1);
-
-
-
-        pthread_create(&read[0],NULL,(void *)reader,(void *)0);
-        pthread_create(&write[0],NULL,(void *)writer,(void *)0);
-
-        pthread_create(&read[1],NULL,(void *)reader,(void *)1);
-        pthread_create(&read[2],NULL,(void *)reader,(void *)2);
-        pthread_create(&write[1],NULL,(void *)writer,(void *)2);
-
-
-
-        pthread_join(read[0],NULL);
-        pthread_join(write[0],NULL);
-
-
-        pthread_join(read[1],NULL);
-        pthread_join(read[2],NULL);
-        pthread_join(write[1],NULL);
-
-        return(0);
+  int i,b;
+  pthread_t rtid[5],wtid[5];
+  sem_init(&mutex,0,1);
+  sem_init(&writeblock,0,1);
+  for(i=0;i<=2;i++)
+  {
+    pthread_create(&wtid[i],NULL,writer,(void *)i);
+    pthread_create(&rtid[i],NULL,reader,(void *)i);
+  }
+  for(i=0;i<=2;i++)
+  {
+    pthread_join(wtid[i],NULL);
+    pthread_join(rtid[i],NULL);
+  }
+  return 0;
 }
-
