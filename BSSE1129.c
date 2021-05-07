@@ -3,7 +3,7 @@
 #include<semaphore.h>
 
 sem_t reader_process,writer_process;
-int data = 0,rcount = 0;
+int value = 0,rcount = 0;
 
 void *reader(void *arg)
 {
@@ -17,7 +17,7 @@ void *reader(void *arg)
   }
 
   sem_post(&reader_process);
-  printf("Data read by the reader(%d) is %d\n",f,data);
+  printf("Reader: %d reads, value= %d\n",f,data);
 
   sem_wait(&reader_process);
   rcount--;
@@ -28,6 +28,7 @@ void *reader(void *arg)
   }
 
   sem_post(&reader_process);
+  
 }
 
 void *writer(void *arg)
@@ -35,18 +36,22 @@ void *writer(void *arg)
   int f;
   f = ((int) arg);
   sem_wait(&writer_process);
-  data++;
-  printf("Data written by the writer(%d)is %d\n",f,data);
+  value++;
+  printf("Writer: %d writes, value= %d\n",f,data);
   
   sem_post(&writer_process);
+
 }
 
 int main()
 {
-  int i,b;
+  int i;
   pthread_t reader_t_id[10],writer_t_id[10];
+  
   sem_init(&reader_process,0,1);
   sem_init(&writer_process,0,1);
+  
+  
   for(i=0;i<10;i++)
   {
     pthread_create(&writer_t_id[i],NULL,writer,(void *)i);
