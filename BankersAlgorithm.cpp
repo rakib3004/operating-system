@@ -5,6 +5,10 @@ using namespace std;
 
 int main()
 {
+    int i,j;
+    i=0;
+    j=0;
+
 
 
     int m,n;
@@ -17,12 +21,21 @@ int main()
 
     int Allocation[n][m]= {0};
     int Need[n][m]= {0};
-    int Available[n][m]= {0};
+    int Available[m]= {0};
     int Max[n][m]= {0};
+    int Process[n]={0};
+    int Resource[m]= {0};
+    int processId=0;
 
-    int i,j;
-    i=0;
-    j=0;
+    cout<<"Resource:";
+
+    for(i=0; i<m; i++)
+    {
+        cin>>Resource[i];
+    }
+
+    int totalAlloc[m]= {0};
+
 
     cout<<"Allocation:";
 
@@ -31,8 +44,10 @@ int main()
         for(j=0; j<m; j++)
         {
             cin>>Allocation[i][j];
+            totalAlloc[j]=totalAlloc[j]+Allocation[i][j];
         }
     }
+
 
 
     cout<<"Max:";
@@ -46,20 +61,27 @@ int main()
     }
 
 
-    cout<<"Available:";
+
     for(j=0; j<m; j++)
     {
-        cin>>Available[0][j];
+        Available[j]=Resource[j]-totalAlloc[j];
     }
+
+
+    for(i=0; i<n; i++)
+    {
+        for(j=0; j<m; j++)
+        {
+            Need[i][j] = Max[i][j]-Allocation[i][j];
+        }
+    }
+
+
 
 
     bool Finish[n];
     int Work[m]= {0};
 
-    for(j=0; j<m; j++)
-    {
-        Work[j]=Available[0][j];
-    }
 
     for(i=0; i<n; i++)
     {
@@ -67,49 +89,76 @@ int main()
     }
 
 
-    for(i=0;i<n;i++){
-        for(j=0;j<m;j++){
-        Available[i][j] = Available[i][j]-Work[j];
-        Allocation[i][j]= Allocation[i][j]+Work[j];
-        Max[i][j]=Max[i][j]-Work[j];
+//    for(i=0; i<n; i++)
+//    {
+//        for(j=0; j<m; j++)
+//        {
+//            Available[i][j] = Available[i][j]-Work[j];
+//            Allocation[i][j]= Allocation[i][j]+Work[j];
+//            Max[i][j]=Max[i][j]-Work[j];
+//
+//        }
+//    }
+
+    bool isNotWork=false;
+
+    for(int k=0; k<n; k++)
+    {
+
+        for(i=0; i<n; i++)
+        {
+
+
+            if(Finish[i]==false)
+            {
+                isNotWork=false;
+                for(j=0; j<m; j++)
+                {
+
+                    if(Need[i][j]>Available[j])
+                    {
+
+                        isNotWork=true;
+                        break;
+
+                    }
+
+                }
+
+                if(isNotWork==false)
+                {
+
+                    //resource sequence
+                    Process[processId++]=i;
+                   // processId++;
+
+                    for(j=0; j<m; j++)
+                    {
+                        Available[j]+=Allocation[i][j];
+                    }
+                    Finish[i]=true;
+                }
+            }
 
         }
+
     }
 
+
+
+
+    cout<<"Process Sequence is: ";
     for(i=0; i<n; i++)
     {
-        for(j=0; j<m; j++)
-        {
-
-            if(Finish[i]==false&&Allocation[i][j]<=Work[j])
-            {
-
-                Finish[i]==true;
-
-            }
-            else{
-Work[j]+=Allocation[i][j];
-            }
-
-        }
-    }
-
-
-
-
-       for(i=0; i<n; i++)
-    {
-        for(j=0; j<m; j++)
-        {
-    cout<<Max[i][j]<<" ";
-        }
-        cout<<endl;
+cout<<"Process_"<<Process[i]<<endl;
     }
 
     return 0;
 
 }
 /*
+
+Resource:10 5 7
 
 Allocation:
 
