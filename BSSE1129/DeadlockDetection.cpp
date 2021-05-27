@@ -20,10 +20,11 @@ int main()
     cin>>m;
 
     int Allocation[n][m]= {0};
-    int Need[n][m]= {0};
+    int Request[n][m]= {0};
+    //int Need[n][m]= {0};
     int Available[m]= {0};
-    int Max[n][m]= {0};
-    int Process[n]={0};
+  //  int Max[n][m]= {0};
+    int Process[n]= {0};
     int Resource[m]= {0};
     int processId=0;
 
@@ -50,13 +51,13 @@ int main()
 
 
 
-    cout<<"Max:"<<endl;
+    cout<<"Request:"<<endl;
 
     for(i=0; i<n; i++)
     {
         for(j=0; j<m; j++)
         {
-            cin>>Max[i][j];
+            cin>>Request[i][j];
         }
     }
 
@@ -68,13 +69,13 @@ int main()
     }
 
 
-    for(i=0; i<n; i++)
-    {
-        for(j=0; j<m; j++)
-        {
-            Need[i][j] = Max[i][j]-Allocation[i][j];
-        }
-    }
+//    for(i=0; i<n; i++)
+//    {
+//        for(j=0; j<m; j++)
+//        {
+//            Need[i][j] = Request[i][j]-Allocation[i][j];
+//        }
+//    }
 
 
 
@@ -86,6 +87,11 @@ int main()
     for(i=0; i<n; i++)
     {
         Finish[i]=false;
+
+        if(Allocation[i][0]+Allocation[i][1]+Allocation[i][2]==0)
+        {
+            Finish[i]=true;
+        }
     }
 
 
@@ -115,7 +121,7 @@ int main()
                 for(j=0; j<m; j++)
                 {
 
-                    if(Need[i][j]>Available[j])
+                    if(Request[i][j]>Available[j])
                     {
 
                         isNotWork=true;
@@ -130,7 +136,7 @@ int main()
 
                     //resource sequence
                     Process[processId++]=i;
-                   // processId++;
+                    // processId++;
 
                     for(j=0; j<m; j++)
                     {
@@ -144,37 +150,48 @@ int main()
 
     }
 
-
-
-
-    cout<<"Process Sequence is: "<<endl;
-    for(i=0; i<n; i++)
+    if(processId!=n)
     {
-cout<<"Process_"<<Process[i]<<endl;
+
+        cout<<"Deadlock is Detected!!!!!!";
     }
+    else
+    {
+
+
+
+        cout<<"Process Sequence is: "<<endl;
+        for(i=0; i<n; i++)
+        {
+            cout<<"Process_"<<Process[i]<<endl;
+        }
+
+
+    }
+
 
     return 0;
 
 }
 /*
 
-Resource:10 5 7
+Resource:7 2 6
 
 Allocation:
 
 0 1 0
 2 0 0
-3 0 2
+3 0 3
 2 1 1
 0 0 2
 
-Max:
+Request:
 
-7 5 3
-3 2 2
-9 0 2
-2 2 2
-4 3 3
+0 0 0
+2 0 2
+0 0 0
+1 0 0
+0 0 2
 
 
 Available:
