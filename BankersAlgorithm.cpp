@@ -27,7 +27,7 @@ int main()
     int Resource[m]= {0};
     int processId=0;
 
-    cout<<"Resource:";
+    cout<<"Resource:"<<endl;
 
     for(i=0; i<m; i++)
     {
@@ -37,7 +37,7 @@ int main()
     int totalAlloc[m]= {0};
 
 
-    cout<<"Allocation:";
+    cout<<"Allocation:"<<endl;
 
     for(i=0; i<n; i++)
     {
@@ -50,7 +50,7 @@ int main()
 
 
 
-    cout<<"Max:";
+    cout<<"Max:"<<endl;
 
     for(i=0; i<n; i++)
     {
@@ -147,7 +147,7 @@ int main()
 
 
 
-    cout<<"Process Sequence is: ";
+    cout<<"Process Sequence is: "<<endl;
     for(i=0; i<n; i++)
     {
 cout<<"Process_"<<Process[i]<<endl;
