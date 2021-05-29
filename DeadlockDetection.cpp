@@ -23,7 +23,7 @@ int main()
     int Request[n][m]= {0};
     //int Need[n][m]= {0};
     int Available[m]= {0};
-  //  int Max[n][m]= {0};
+    //  int Max[n][m]= {0};
     int Process[n]= {0};
     int Resource[m]= {0};
     int processId=0;
@@ -82,13 +82,18 @@ int main()
 
     bool Finish[n];
     int Work[m]= {0};
-
+    int ZeroAllocation=0;
 
     for(i=0; i<n; i++)
     {
         Finish[i]=false;
+        ZeroAllocation=0;
+        for(j=0; j<m; j++)
+        {
+            ZeroAllocation=ZeroAllocation+Allocation[i][j];
+        }
 
-        if(Allocation[i][0]+Allocation[i][1]+Allocation[i][2]==0)
+        if(ZeroAllocation==0)
         {
             Finish[i]=true;
         }
@@ -158,7 +163,7 @@ int main()
     else
     {
 
-
+        cout<<"No Deadlock is Detected!!!!!!"<<endl;
 
         cout<<"Process Sequence is: "<<endl;
         for(i=0; i<n; i++)
