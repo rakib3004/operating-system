@@ -9,18 +9,21 @@ void CPU();
 void initiateIO(){
 cout<<"---------------------------"<<endl;
 cout<<"1.1 Initiate I/O"<<endl;
-cout<<"---------------------------"<<endl;
+cout<<"---------------------------"<<endl<<endl<<endl;
 
 }
 
 void getInterruptSignals(){
-cout<<"---------------------------"<<endl;
+cout<<"---------------------------------------"<<endl;
+cout<<"---------------------------------------"<<endl;
 cout<<"1.2 Get Interrupt Signals"<<endl;
 cout<<"   3 Basic Interrupt Signals: \n\n";
 cout<<"i.Input Signal (which is ready)\n";
 cout<<"ii.Output Signal (which is complete)\n";
 cout<<"iii.Error Signal (which is generate)\n";
-cout<<"---------------------------"<<endl;
+
+cout<<"----------------------------------------"<<endl;
+cout<<"----------------------------------------"<<endl<<endl<<endl;
 
 
 }
@@ -41,20 +44,19 @@ return;
 
 
 void initiateDeviceDriverIO(){
-cout<<"---------------------------"<<endl;
+cout<<"----------------------------------------------"<<endl;
 cout<<"1. Device Driver Initiates Input Output at CPU"<<endl;
-cout<<"---------------------------"<<endl;
+cout<<"-----------------------------------------------"<<endl<<endl<<endl;
 
-cout<<"---------------------------"<<endl;
+cout<<"---------------------------------"<<endl;
 cout<<"1.a. Go to I/O Controller  -----> "<<endl;
-cout<<"---------------------------"<<endl;
+cout<<"---------------------------------"<<endl<<endl<<endl;
 
 
 InputOutputController();
-
+cout<<"--------------------------------------------------------"<<endl;
 cout<<"1.b. I/O Controller's action is finished !!!!!!  -----> "<<endl;
-cout<<"---------------------------"<<endl;
-cout<<"---------------------------"<<endl;
+cout<<"======================================================="<<endl<<endl<<endl;
 
 return;
 
@@ -62,11 +64,18 @@ return;
 
 
 void receivingInterrupt(){
+cout<<"-----------------------------------"<<endl;
+cout<<"2.CPU receive all interrupt signals"<<endl;
+cout<<"I/O Controller ->O  ->O ->O ->O ->O CPU"<<endl;
+cout<<"[O means data steam]"<<endl;
+cout<<"-----------------------------------"<<endl<<endl<<endl;
 
-cout<<"CPU receive all interrupt signals"<<endl<<endl;
-cout<<"I/O Controller ->O  ->O ->O ->O ->O CPU"<<endl<<endl;
-cout<<"Transfer Control to Interrupt Handler"<<endl<<endl;
-cout<<"CPU Controller ->O  ->O ->O ->O ->O Interrupt Handler"<<endl<<endl;
+cout<<"-----------------------------------"<<endl;
+cout<<"2.a. Transfer Control to Interrupt Handler"<<endl;
+cout<<"CPU Controller ->O  ->O ->O ->O ->O Interrupt Handler"<<endl;
+cout<<"[O means data steam]"<<endl;
+cout<<"-----------------------------------"<<endl<<endl<<endl;
+
 
 
 }
@@ -74,22 +83,27 @@ cout<<"CPU Controller ->O  ->O ->O ->O ->O Interrupt Handler"<<endl<<endl;
 
 void processData(){
 
-
-cout<<"Interrupt Handler Process Data!!"<<endl;
-
+cout<<"-----------------------------------"<<endl;
+cout<<"3. Interrupt Handler Process Data!!"<<endl;
 cout<<"->O ->O ===> -># -># -># "<<endl;
+cout<<"[# means processed data steam]"<<endl;
+cout<<"-----------------------------------"<<endl<<endl<<endl;
 
-cout<<"Return to I/O Controller (Interrupts)"<<endl;
 
+cout<<"-----------------------------------"<<endl;
+cout<<"3.a. Return to I/O Controller (Interrupts)"<<endl;
 cout<<"Interrupt Handler -># -># -># -># -># I/O Controller (Interrupts) "<<endl;
+cout<<"[# means processed data steam]"<<endl;
+cout<<"-----------------------------------"<<endl<<endl<<endl;
+
 
 }
 
 void resumesCpuInterruptedTask(){
 
-
-cout<<"Restart CPU's remaining and new interrupt task"<<endl;
-
+cout<<"-----------------------------------"<<endl;
+cout<<"4.Restart CPU's remaining and new interrupt task"<<endl;
+cout<<"-----------------------------------"<<endl<<endl<<endl;
 
 }
 
