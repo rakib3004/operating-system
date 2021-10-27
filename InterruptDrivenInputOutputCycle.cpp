@@ -9,15 +9,50 @@
 using namespace std;
 void CPU();
 
-struct interruption{
-int interruptionState;
-void (*interruptionHandler)();
+struct interruption
+{
+    int interruptionState;
+    void (*interruptionHandler)();
 
 };
 
 struct interruption interruptionVectorObject[totalInterruptionNumbers];
 
+void setInterruptVactorTableValue()
+{
 
+
+    for(int i=0; i<totalInterruptionNumbers; i++)
+    {
+        interruptionVectorObject[i].interruptionState=0;
+
+
+    }
+
+
+
+    interruptionVectorObject[0].interruptionHandler = divideError;
+    interruptionVectorObject[1].interruptionHandler = debugException;
+    interruptionVectorObject[2].interruptionHandler = nullInterrupt;
+    interruptionVectorObject[3].interruptionHandler = breakPoint;
+    interruptionVectorObject[4].interruptionHandler = intoDetectedOverflow;
+    interruptionVectorObject[5].interruptionHandler = boundRangeException;
+    interruptionVectorObject[6].interruptionHandler = invalidOpcode;
+    interruptionVectorObject[7].interruptionHandler = deviceNotAvailable;
+    interruptionVectorObject[8].interruptionHandler = doubleFault;
+    interruptionVectorObject[9].interruptionHandler = coprocessorSegmentOverrun;
+    interruptionVectorObject[10].interruptionHandler = invalidTaskStateSegment;
+    interruptionVectorObject[11].interruptionHandler = stackFault;
+    interruptionVectorObject[12].interruptionHandler = generalProtection;
+    interruptionVectorObject[13].interruptionHandler = pageFault;
+    interruptionVectorObject[14].interruptionHandler = intelReserved;
+    interruptionVectorObject[15].interruptionHandler = floatingPointError;
+    interruptionVectorObject[16].interruptionHandler = allignmentCheck;
+    interruptionVectorObject[17].interruptionHandler = machineCheck;
+    interruptionVectorObject[18].interruptionHandler = hardwareReserved;
+    interruptionVectorObject[19].interruptionHandler = maskableInterrupt;
+
+}
 
 void interruptionVectorStates()
 {
@@ -28,7 +63,7 @@ void interruptionVectorStates()
 
     srand(time(0));
 
-
+    setInterruptVactorTableValue();
 
 }
 
@@ -38,7 +73,8 @@ void initiateIO()
 {
     cout<<"---------------------------"<<endl;
     cout<<"1.1 Initiate I/O"<<endl;
-    cout<<"---------------------------"<<endl<<endl<<endl;     sleep(1);
+    cout<<"---------------------------"<<endl<<endl<<endl;
+    sleep(1);
 
 }
 
@@ -52,11 +88,13 @@ void getInterruptSignals()
     cout<<"ii.Output Signal (which is complete)\n";
     cout<<"iii.Error Signal (which is generate)\n";
 
-    cout<<"Visualize Interruption ==>"<<endl<<endl;     sleep(1);
+    cout<<"Visualize Interruption ==>"<<endl<<endl;
+    sleep(1);
     interruptionVectorStates();
 
     cout<<"----------------------------------------"<<endl;
-    cout<<"----------------------------------------"<<endl<<endl<<endl;     sleep(1);
+    cout<<"----------------------------------------"<<endl<<endl<<endl;
+    sleep(1);
 
 
 }
@@ -81,17 +119,20 @@ void initiateDeviceDriverIO()
 {
     cout<<"----------------------------------------------"<<endl;
     cout<<"1. Device Driver Initiates Input Output at CPU"<<endl;
-    cout<<"-----------------------------------------------"<<endl<<endl<<endl;     sleep(1);
+    cout<<"-----------------------------------------------"<<endl<<endl<<endl;
+    sleep(1);
 
     cout<<"---------------------------------"<<endl;
     cout<<"1.a. Go to I/O Controller  -----> "<<endl;
-    cout<<"---------------------------------"<<endl<<endl<<endl;     sleep(1);
+    cout<<"---------------------------------"<<endl<<endl<<endl;
+    sleep(1);
 
 
     InputOutputController();
     cout<<"--------------------------------------------------------"<<endl;
     cout<<"1.b. I/O Controller's action is finished !!!!!!  -----> "<<endl;
-    cout<<"======================================================="<<endl<<endl<<endl;     sleep(1);
+    cout<<"======================================================="<<endl<<endl<<endl;
+    sleep(1);
 
     return;
 
@@ -104,13 +145,15 @@ void receivingInterrupt()
     cout<<"2.CPU receive all interrupt signals"<<endl;
     cout<<"I/O Controller ->O  ->O ->O ->O ->O CPU"<<endl;
     cout<<"[O means data steam]"<<endl;
-    cout<<"-----------------------------------"<<endl<<endl<<endl;     sleep(1);
+    cout<<"-----------------------------------"<<endl<<endl<<endl;
+    sleep(1);
 
     cout<<"-----------------------------------"<<endl;
     cout<<"2.a. Transfer Control to Interrupt Handler"<<endl;
     cout<<"CPU Controller ->O  ->O ->O ->O ->O Interrupt Handler"<<endl;
     cout<<"[O means data steam]"<<endl;
-    cout<<"-----------------------------------"<<endl<<endl<<endl;     sleep(1);
+    cout<<"-----------------------------------"<<endl<<endl<<endl;
+    sleep(1);
 
 
 
@@ -124,14 +167,16 @@ void processData()
     cout<<"3. Interrupt Handler Process Data!!"<<endl;
     cout<<"->O ->O ===> -># -># -># "<<endl;
     cout<<"[# means processed data steam]"<<endl;
-    cout<<"-----------------------------------"<<endl<<endl<<endl;     sleep(1);
+    cout<<"-----------------------------------"<<endl<<endl<<endl;
+    sleep(1);
 
 
     cout<<"-----------------------------------"<<endl;
     cout<<"3.a. Return to I/O Controller (Interrupts)"<<endl;
     cout<<"Interrupt Handler -># -># -># -># -># I/O Controller (Interrupts) "<<endl;
     cout<<"[# means processed data steam]"<<endl;
-    cout<<"-----------------------------------"<<endl<<endl<<endl;     sleep(1);
+    cout<<"-----------------------------------"<<endl<<endl<<endl;
+    sleep(1);
 
 
 }
@@ -141,7 +186,8 @@ void resumesCpuInterruptedTask()
 
     cout<<"-----------------------------------"<<endl;
     cout<<"4.Restart CPU's remaining and new interrupt task"<<endl;
-    cout<<"-----------------------------------"<<endl<<endl<<endl;     sleep(1);
+    cout<<"-----------------------------------"<<endl<<endl<<endl;
+    sleep(1);
 
 }
 
