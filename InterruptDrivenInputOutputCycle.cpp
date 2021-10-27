@@ -18,6 +18,158 @@ struct interruption
 
 struct interruption interruptionVectorObject[totalInterruptionNumbers];
 
+
+
+
+
+void divideError()
+{
+    interruptionVectorObject[i].interruptionState=0;
+
+}
+
+
+void  debugException()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+
+}
+
+
+void  nullInterrupt()
+{
+
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+
+}
+
+void  breakPoint()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+}
+
+void  intoDetectedOverflow()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+}
+
+
+void  boundRangeException()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+}
+
+
+void  invalidOpcode()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+}
+
+
+void  deviceNotAvailable()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+}
+
+
+void  doubleFault()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+}
+
+
+
+void  coprocessorSegmentOverrun()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+}
+
+
+void  invalidTaskStateSegment()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+}
+
+
+void  stackFault()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+
+}
+
+
+void  generalProtection()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+}
+
+
+void  pageFault()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+
+}
+
+
+void  intelReserved()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+}
+
+
+void  floatingPointError()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+}
+
+
+void  allignmentCheck()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+}
+
+
+void  machineCheck()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+
+}
+
+
+void  hardwareReserved()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+
+}
+
+
+void  maskableInterrupt()
+{
+    interruptionVectorObject[i].interruptionState=0;
+    cout<<""<<endl;
+
+}
+
+
+
 void setInterruptVactorTableValue()
 {
 
@@ -28,8 +180,6 @@ void setInterruptVactorTableValue()
 
 
     }
-
-
 
     interruptionVectorObject[0].interruptionHandler = divideError;
     interruptionVectorObject[1].interruptionHandler = debugException;
