@@ -25,6 +25,8 @@ struct interruption interruptionVectorObject[totalInterruptionNumbers];
 void divideError()
 {
     interruptionVectorObject[i].interruptionState=0;
+        cout<<"Division Error"<<endl;
+
 
 }
 
@@ -32,7 +34,7 @@ void divideError()
 void  debugException()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Debug Exception"<<endl;
 
 }
 
@@ -41,48 +43,48 @@ void  nullInterrupt()
 {
 
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Null Interruption"<<endl;
 
 }
 
 void  breakPoint()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Break Point"<<endl;
 }
 
 void  intoDetectedOverflow()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"INTO Detected Overflow"<<endl;
 }
 
 
 void  boundRangeException()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Bound Range Exception"<<endl;
 }
 
 
 void  invalidOpcode()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Invalid Opcode"<<endl;
 }
 
 
 void  deviceNotAvailable()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Device not Available"<<endl;
 }
 
 
 void  doubleFault()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Double Fault"<<endl;
 }
 
 
@@ -90,21 +92,21 @@ void  doubleFault()
 void  coprocessorSegmentOverrun()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Co-Processor Segment Overrun"<<endl;
 }
 
 
 void  invalidTaskStateSegment()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Invalid Task State Segment"<<endl;
 }
 
 
 void  stackFault()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Stack Fault"<<endl;
 
 }
 
@@ -112,14 +114,14 @@ void  stackFault()
 void  generalProtection()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"General Protection"<<endl;
 }
 
 
 void  pageFault()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Page Fault"<<endl;
 
 }
 
@@ -127,28 +129,28 @@ void  pageFault()
 void  intelReserved()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Intel Reserved"<<endl;
 }
 
 
 void  floatingPointError()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Floating Point Error"<<endl;
 }
 
 
-void  allignmentCheck()
+void  alignmentCheck()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Alignment Check"<<endl;
 }
 
 
 void  machineCheck()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Machine Check"<<endl;
 
 }
 
@@ -156,7 +158,7 @@ void  machineCheck()
 void  hardwareReserved()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Hardware Reserved"<<endl;
 
 }
 
@@ -164,7 +166,7 @@ void  hardwareReserved()
 void  maskableInterrupt()
 {
     interruptionVectorObject[i].interruptionState=0;
-    cout<<""<<endl;
+    cout<<"Mask-able Interrupt"<<endl;
 
 }
 
@@ -197,7 +199,7 @@ void setInterruptVactorTableValue()
     interruptionVectorObject[13].interruptionHandler = pageFault;
     interruptionVectorObject[14].interruptionHandler = intelReserved;
     interruptionVectorObject[15].interruptionHandler = floatingPointError;
-    interruptionVectorObject[16].interruptionHandler = allignmentCheck;
+    interruptionVectorObject[16].interruptionHandler = alignmentCheck;
     interruptionVectorObject[17].interruptionHandler = machineCheck;
     interruptionVectorObject[18].interruptionHandler = hardwareReserved;
     interruptionVectorObject[19].interruptionHandler = maskableInterrupt;
