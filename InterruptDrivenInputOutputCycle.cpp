@@ -7,18 +7,19 @@ void CPU();
 // Input Output Controller Section !!!!!!!!!!!!
 
 void initiateIO(){
-
-cout<<"Initiate I/O"<<endl;
+cout<<"---------------------------"<<endl;
+cout<<"1.1 Initiate I/O"<<endl;
+cout<<"---------------------------"<<endl;
 
 }
 
 void getInterruptSignals(){
-
 cout<<"---------------------------"<<endl;
+cout<<"1.2 Get Interrupt Signals"<<endl;
 cout<<"   3 Basic Interrupt Signals: \n\n";
-cout<<"1.Input Signal (which is ready)\n";
-cout<<"2.Output Signal (which is complete)\n";
-cout<<"3.Error Signal (which is generate)\n";
+cout<<"i.Input Signal (which is ready)\n";
+cout<<"ii.Output Signal (which is complete)\n";
+cout<<"iii.Error Signal (which is generate)\n";
 cout<<"---------------------------"<<endl;
 
 
@@ -28,7 +29,7 @@ void InputOutputController(){
 
 printf("---------------------------------\n");
 printf("======== I/O Controller ==========\n");
-printf("----------------------------------\n");
+printf("----------------------------------\n\n\n");
 
 initiateIO();
 getInterruptSignals();
@@ -39,17 +40,22 @@ return;
 
 
 
-
-
-
-
 void initiateDeviceDriverIO(){
-cout<<"Device Driver Initiates Input Output at CPU"<<endl;
-cout<<"Go to I/O Controller  -----> "<<endl;
+cout<<"---------------------------"<<endl;
+cout<<"1. Device Driver Initiates Input Output at CPU"<<endl;
+cout<<"---------------------------"<<endl;
+
+cout<<"---------------------------"<<endl;
+cout<<"1.a. Go to I/O Controller  -----> "<<endl;
+cout<<"---------------------------"<<endl;
+
 
 InputOutputController();
 
-cout<<"I/O Controller's action is finished !!!!!!  -----> "<<endl;
+cout<<"1.b. I/O Controller's action is finished !!!!!!  -----> "<<endl;
+cout<<"---------------------------"<<endl;
+cout<<"---------------------------"<<endl;
+
 return;
 
 }
@@ -94,12 +100,12 @@ void CPU(){
 
 printf("---------------------------------\n");
 printf("============ CPU ================\n");
-printf("----------------------------------\n");
+printf("----------------------------------\n\n\n");
 time_t now = time(0);
 
    char* dt = ctime(&now);
 
-   cout << "*_*_*_*_*_*_*_" << dt << "*_*_*_*_*_*_*_"  << endl;
+   cout <<dt<< endl;
 
 initiateDeviceDriverIO();
 receivingInterrupt();
