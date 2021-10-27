@@ -24,7 +24,7 @@ struct interruption interruptionVectorObject[totalInterruptionNumbers];
 
 void divideError()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[0].interruptionState=0;
         cout<<"Division Error"<<endl;
 
 
@@ -33,7 +33,7 @@ void divideError()
 
 void  debugException()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[1].interruptionState=0;
     cout<<"Debug Exception"<<endl;
 
 }
@@ -42,48 +42,48 @@ void  debugException()
 void  nullInterrupt()
 {
 
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[2].interruptionState=0;
     cout<<"Null Interruption"<<endl;
 
 }
 
 void  breakPoint()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[3].interruptionState=0;
     cout<<"Break Point"<<endl;
 }
 
 void  intoDetectedOverflow()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[4].interruptionState=0;
     cout<<"INTO Detected Overflow"<<endl;
 }
 
 
 void  boundRangeException()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[5].interruptionState=0;
     cout<<"Bound Range Exception"<<endl;
 }
 
 
 void  invalidOpcode()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[6].interruptionState=0;
     cout<<"Invalid Opcode"<<endl;
 }
 
 
 void  deviceNotAvailable()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[7].interruptionState=0;
     cout<<"Device not Available"<<endl;
 }
 
 
 void  doubleFault()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[8].interruptionState=0;
     cout<<"Double Fault"<<endl;
 }
 
@@ -91,21 +91,21 @@ void  doubleFault()
 
 void  coprocessorSegmentOverrun()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[9].interruptionState=0;
     cout<<"Co-Processor Segment Overrun"<<endl;
 }
 
 
 void  invalidTaskStateSegment()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[10].interruptionState=0;
     cout<<"Invalid Task State Segment"<<endl;
 }
 
 
 void  stackFault()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[11].interruptionState=0;
     cout<<"Stack Fault"<<endl;
 
 }
@@ -113,14 +113,14 @@ void  stackFault()
 
 void  generalProtection()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[12].interruptionState=0;
     cout<<"General Protection"<<endl;
 }
 
 
 void  pageFault()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[13].interruptionState=0;
     cout<<"Page Fault"<<endl;
 
 }
@@ -128,28 +128,28 @@ void  pageFault()
 
 void  intelReserved()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[14].interruptionState=0;
     cout<<"Intel Reserved"<<endl;
 }
 
 
 void  floatingPointError()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[15].interruptionState=0;
     cout<<"Floating Point Error"<<endl;
 }
 
 
 void  alignmentCheck()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[16].interruptionState=0;
     cout<<"Alignment Check"<<endl;
 }
 
 
 void  machineCheck()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[17].interruptionState=0;
     cout<<"Machine Check"<<endl;
 
 }
@@ -157,7 +157,7 @@ void  machineCheck()
 
 void  hardwareReserved()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[18].interruptionState=0;
     cout<<"Hardware Reserved"<<endl;
 
 }
@@ -165,7 +165,7 @@ void  hardwareReserved()
 
 void  maskableInterrupt()
 {
-    interruptionVectorObject[i].interruptionState=0;
+    interruptionVectorObject[19].interruptionState=0;
     cout<<"Mask-able Interrupt"<<endl;
 
 }
@@ -206,6 +206,26 @@ void setInterruptVactorTableValue()
 
 }
 
+
+void *creatingInterruption(void *args) {
+
+    int limitStraem = 10;
+    while (limitStraem--) {
+        sleep(1);
+            srand(time(0));
+        interruptionVectorObject[rand() % totalInterruptionNumbers].interruptionState = 1;
+    }
+    pthread_exit(NULL);
+}
+
+void checkInterruption() {
+    for (int i = 0; i < totalInterruptionNumbers; i++) {
+        if (interruptionVectorObject[i].interruptionState) {
+            interruptionVectorObject[i].interruptionHandler();
+        }
+    }
+}
+
 void interruptionVectorStates()
 {
 
@@ -216,6 +236,25 @@ void interruptionVectorStates()
     srand(time(0));
 
     setInterruptVactorTableValue();
+
+    int i;
+
+    for (i = 0; i < totalThreadNumbers; i++) {
+        if (pthread_create(&threads[i], &attr, creatingInterruption, NULL)) {
+
+        }
+    }
+
+    int keyboardStreamCount = 29;
+    while (keyboardStreamCount--) {
+        printf("%c  ----> is a keyboard input\n", (rand() % 90)+65);
+        sleep(1);
+        checkInterruption();
+    }
+
+    for (i = 0; i < totalThreadNumbers; i++) {
+        pthread_join(threads[i], NULL);
+    }
 
 }
 
@@ -241,8 +280,16 @@ void getInterruptSignals()
     cout<<"iii.Error Signal (which is generate)\n";
 
     cout<<"Visualize Interruption ==>"<<endl<<endl;
+        cout<<"|||||||||||||||||||||||||||||"<<endl;
+        cout<<"|||||||||||||||||||||||||||||"<<endl<<endl;
+
+
+
     sleep(1);
     interruptionVectorStates();
+
+     cout<<"|||||||||||||||||||||||||||||"<<endl;
+    cout<<"|||||||||||||||||||||||||||||"<<endl<<endl;
 
     cout<<"----------------------------------------"<<endl;
     cout<<"----------------------------------------"<<endl<<endl<<endl;
